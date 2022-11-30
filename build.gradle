@@ -32,12 +32,12 @@ dependencies {
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 }
 
-task fatJar(type: Jar) {
-    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+application {
+    mainClass.set("com.example.ApplicationKt")
+}
 
-    manifest {
-        attributes 'Main-Class': mainClassName
+ktor {
+    fatJar {
+        archiveFileName.set("fat.jar")
     }
-    from { configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
 }
