@@ -12,7 +12,7 @@ import java.sql.Connection
 import java.sql.DriverManager
 
 val ProdModule = module {
-  val jdbcUrl = "jdbc:postgresql://89.208.86.234:5432/postgres"
+  val jdbcUrl = "jdbc:postgresql://localhost:5432/postgres"
 
   single<Connection> { DriverManager.getConnection(jdbcUrl, "postgres", "postgres") }
   single<DutyStorage> { DutyStorageDB(get()) }
