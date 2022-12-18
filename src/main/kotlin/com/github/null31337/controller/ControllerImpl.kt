@@ -2,6 +2,7 @@ package com.github.null31337.controller
 
 import com.github.null31337.model.Duty
 import com.github.null31337.model.DutyReceive
+import com.github.null31337.model.SecretCode
 import com.github.null31337.service.DutyService
 import com.github.null31337.service.UserService
 import io.ktor.server.application.*
@@ -12,8 +13,8 @@ class ControllerImpl(
   private val dutyService: DutyService,
   private val userService: UserService
 ) : Controller {
-  override fun generate(userId: Long): String {
-    return userService.generate(userId)
+  override fun generate(userId: Long): SecretCode {
+    return SecretCode(userService.generate(userId))
   }
 
   override fun login(call: ApplicationCall): Long? = runBlocking {
