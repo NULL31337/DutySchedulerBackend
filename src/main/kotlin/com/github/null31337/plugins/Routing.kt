@@ -1,5 +1,6 @@
 package com.github.null31337.plugins
 
+import com.github.null31337.controller.Controller
 import com.github.null31337.controller.ControllerImpl
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -8,7 +9,7 @@ import io.ktor.server.routing.*
 import org.koin.java.KoinJavaComponent.inject
 
 fun Application.configureRouting() {
-  val controllerImpl: ControllerImpl by inject(ControllerImpl::class.java)
+  val controllerImpl: ControllerImpl by inject(Controller::class.java)
 
   routing {
     post("/login") {

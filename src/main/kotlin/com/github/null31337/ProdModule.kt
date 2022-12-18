@@ -1,5 +1,6 @@
 package com.github.null31337
 
+import com.github.null31337.controller.Controller
 import com.github.null31337.controller.ControllerImpl
 import com.github.null31337.repository.DutyStorage
 import com.github.null31337.repository.DutyStorageDB
@@ -18,5 +19,5 @@ val ProdModule = module {
   single<DutyStorage> { DutyStorageDB(get()) }
   single<DutyService> { DutyServiceImpl(get()) }
   single<UserService> { UserServiceImpl() }
-  single { ControllerImpl(get(), get()) }
+  single<Controller> { ControllerImpl(get(), get()) }
 }
