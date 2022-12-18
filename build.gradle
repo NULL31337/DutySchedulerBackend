@@ -30,10 +30,16 @@ dependencies {
     implementation "org.jetbrains:kotlin-css-jvm:1.0.0-pre.129-kotlin-1.4.20"
     implementation "io.ktor:ktor-server-netty-jvm:$ktor_version"
     implementation "ch.qos.logback:logback-classic:$logback_version"
+
     testImplementation "io.ktor:ktor-server-tests-jvm:$ktor_version"
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+
     implementation "org.postgresql:postgresql:42.3.1"
     implementation 'com.google.guava:guava:30.0-android'
+
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:3.2.0'
+    testImplementation 'org.assertj:assertj-core:3.6.1'
+
 //    liquibaseRuntime "org.liquibase:liquibase-core:2.1.1"
 //    liquibaseRuntime "ch.qos.logback:logback-core:1.2.3"
 //    liquibaseRuntime "ch.qos.logback:logback-classic:1.2.3"

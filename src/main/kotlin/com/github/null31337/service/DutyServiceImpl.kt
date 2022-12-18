@@ -11,7 +11,6 @@ class DutyServiceImpl(private val dutyStorage: DutyStorage) : DutyService {
   }
 
   override suspend fun add(id: Long, duty: DutyReceive): Long {
-    dutyStorage.add(id, duty)
-    return id
+    return dutyStorage.add(id, duty)
   }
 }

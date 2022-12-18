@@ -4,6 +4,7 @@ import com.github.null31337.model.Duty
 import com.github.null31337.model.DutyReceive
 import com.github.null31337.model.DutyStatus
 import java.sql.Connection
+import java.sql.Statement
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,14 +39,20 @@ class DutyStorageDB(private val connection: Connection) : DutyStorage {
   }
 
   override suspend fun add(userId: Long, duty: DutyReceive): Long {
-    val statement = connection.prepareStatement("INSERT INTO duties (user_id, name, description, deadline, status) VALUES (?, ?, ?, ?, ?)")
+    val statement = connection.prepareStatement("INSERT INTO duties (user_id, name, description, deadline, status) VALUES (?, ?, ?, ?, ?)",
+      Statement.RETURN_GENERATED_KEYS
+    )
     statement.setLong(1, userId)
     statement.setString(2, duty.name)
     statement.setString(3, duty.description)
     statement.setTimestamp(4, Timestamp(duty.deadline.toDate().time))
     statement.setString(5, duty.status.name)
     statement.execute()
-    return 0
+
+    val resultSet = statement.generatedKeys
+    return resultSet.next().let {
+      resultSet.getLong(1)
+    }
   }
 }
 

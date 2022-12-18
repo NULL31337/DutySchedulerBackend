@@ -11,14 +11,14 @@ fun Application.configureRouting() {
   val controllerImpl: ControllerImpl by inject(ControllerImpl::class.java)
 
   routing {
-    get("/login") {
+    post("/login") {
       controllerImpl.login(call)?.let {
         call.respond(it)
       } ?: call.respondText("Wrong secret key", status = HttpStatusCode.OK)
     }
 
     route("/{userId}") {
-      post("/generate") {
+      get("/generate") {
         call.respond(controllerImpl.generate(call.userId()))
       }
 
