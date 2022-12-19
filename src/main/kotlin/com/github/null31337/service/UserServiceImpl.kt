@@ -12,6 +12,10 @@ class UserServiceImpl() : UserService {
   override fun login(secretCode: String): Long? {
     println(cache.asMap())
     println(secretCode)
+    println(secretCode.length)
+    println(cache.getIfPresent(secretCode))
+    println(cache.getIfPresent(secretCode.substring(1, 6)))
+
 
     return cache.getIfPresent(secretCode)
   }
