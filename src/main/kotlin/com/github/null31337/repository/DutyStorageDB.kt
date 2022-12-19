@@ -31,7 +31,7 @@ class DutyStorageDB(private val connection: Connection) : DutyStorage {
         resultSet.getLong("user_id"),
         resultSet.getString("name"),
         resultSet.getString("description"),
-        resultSet.getString("deadline").substring(0, 10),
+        SimpleDateFormat("dd.MM.yyyy").format(resultSet.getString("deadline").toDate()),
         DutyStatus.valueOf(resultSet.getString("status"))
       ))
     }
