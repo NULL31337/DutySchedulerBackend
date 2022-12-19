@@ -5,7 +5,6 @@ import com.github.null31337.model.DutyReceive
 import com.github.null31337.model.DutyStatus
 import java.sql.Connection
 import java.sql.Statement
-import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -31,7 +30,7 @@ class DutyStorageDB(private val connection: Connection) : DutyStorage {
         resultSet.getLong("user_id"),
         resultSet.getString("name"),
         resultSet.getString("description"),
-        SimpleDateFormat("dd.MM.yyyy").format(resultSet.getString("deadline").toDate()),
+        resultSet.getString("deadline"),
         DutyStatus.valueOf(resultSet.getString("status"))
       ))
     }
@@ -45,7 +44,7 @@ class DutyStorageDB(private val connection: Connection) : DutyStorage {
     statement.setLong(1, userId)
     statement.setString(2, duty.name)
     statement.setString(3, duty.description)
-    statement.setTimestamp(4, Timestamp(duty.deadline.toDate().time))
+    statement.setString(4, duty.deadline)
     statement.setString(5, duty.status.name)
     statement.execute()
 
