@@ -9,8 +9,12 @@ class UserServiceImpl() : UserService {
   private val cache: Cache<String, Long> =
     CacheBuilder.newBuilder().expireAfterWrite(30, TimeUnit.SECONDS).build()
 
-  override fun login(secretCode: String): Long? = cache.getIfPresent(secretCode)
+  override fun login(secretCode: String): Long? {
+    println(cache.asMap())
+    println(secretCode)
 
+    return cache.getIfPresent(secretCode)
+  }
   override fun generate(id: Long) = random.nextString().also { cache.put(it, id) }
 
   private val random = RandomString()
