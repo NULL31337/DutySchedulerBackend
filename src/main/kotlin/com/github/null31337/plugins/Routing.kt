@@ -2,7 +2,6 @@ package com.github.null31337.plugins
 
 import com.github.null31337.controller.Controller
 import com.github.null31337.controller.ControllerImpl
-import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -13,9 +12,7 @@ fun Application.configureRouting() {
 
   routing {
     post("/login") {
-      controllerImpl.login(call)?.let {
-        call.respond(it)
-      } ?: call.respondText("Wrong secret key", status = HttpStatusCode.OK)
+      call.respond(controllerImpl.login(call) ?: 0)
     }
 
     route("/{userId}") {
