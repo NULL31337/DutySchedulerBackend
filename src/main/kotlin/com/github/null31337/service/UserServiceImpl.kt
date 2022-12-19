@@ -10,14 +10,10 @@ class UserServiceImpl() : UserService {
     CacheBuilder.newBuilder().expireAfterWrite(30, TimeUnit.SECONDS).build()
 
   override fun login(secretCode: String): Long? {
-    println(cache.asMap())
-    println(secretCode)
-    println(secretCode.length)
-    println(cache.getIfPresent(secretCode))
-    println(cache.getIfPresent(secretCode.substring(1, 6)))
-
-
-    return cache.getIfPresent(secretCode)
+    if (secretCode.length != 7) {
+      return null
+    }
+    return cache.getIfPresent(secretCode.substring(1, 6))
   }
   override fun generate(id: Long) = random.nextString().also { cache.put(it, id) }
 
